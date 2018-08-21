@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/preferences_broker_group_title">
+        <EditTextPreference
+            android:title="@string/preferences_broker_address_title"
+            android:key="@string/preferences_broker_address_key">
+        </EditTextPreference>
+        <EditTextPreference
+            android:title="@string/preferences_broker_username_title"
+            android:key="@string/preferences_broker_username_key">
+        </EditTextPreference>
+        <EditTextPreference
+            android:title="@string/preferences_broker_password_title"
+            android:key="@string/preferences_broker_password_key">
+        </EditTextPreference>
+    </PreferenceCategory>
+</PreferenceScreen>

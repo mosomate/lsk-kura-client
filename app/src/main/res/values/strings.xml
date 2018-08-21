@@ -1,0 +1,38 @@
+<resources>
+    <!-- General UI titles -->
+    <string name="app_name">LSK Kura Kliens</string>
+
+    <string name="action_settings">Beállítások</string>
+
+    <string name="tab_1_title">Meeting Display</string>
+    <string name="tab_2_title">Meeting Eye</string>
+
+    <string name="mqtt_state_textview_title">MQTT bróker:</string>
+    <string name="mqtt_state_connected">Kapcsolódva</string>
+    <string name="mqtt_state_not_connected">Nincs kapcsolat</string>
+
+    <!-- Meeting display UI titles -->
+    <string name="meeting_display_power_on_title">Bekapcsolás</string>
+    <string name="meeting_display_volume_title">Hangerő: [%03d]</string>
+    <string name="meeting_display_source_group_title">Forrás</string>
+
+    <!-- MQTT -->
+    <string name="broker_uri">tcp://%s:1883</string>
+    <string name="client_id">KuraClient</string>
+    <string name="topic_prefix">iotgateway/devices/%s</string>
+    <string name="control_topic">topic_prefix%s/control</string>
+    <string name="status_topic">iotgateway/devices/+/status/#</string>
+
+    <!-- Strings related to Settings -->
+    <string name="preferences_broker_group_title">MQTT bróker</string>
+
+    <string name="preferences_broker_address_title">Host/IP</string>
+    <string name="preferences_broker_address_key">preferences_broker_address</string>
+
+    <string name="preferences_broker_username_title">Felhasználónév</string>
+    <string name="preferences_broker_username_key">preferences_broker_username</string>
+
+    <string name="preferences_broker_password_title">Jelszó</string>
+    <string name="preferences_broker_password_key">preferences_broker_password</string>
+
+</resources>
