@@ -11,16 +11,31 @@
     <string name="mqtt_state_connected">Kapcsolódva</string>
     <string name="mqtt_state_not_connected">Nincs kapcsolat</string>
 
-    <!-- Meeting display UI titles -->
+    <!-- Meeting Display UI titles -->
     <string name="meeting_display_power_on_title">Bekapcsolás</string>
+    <string name="meeting_display_power_off_title">Kikapcsolás</string>
     <string name="meeting_display_volume_title">Hangerő: [%03d]</string>
     <string name="meeting_display_source_group_title">Forrás</string>
+    <string name="meeting_display_source_pc_title">PC</string>
+    <string name="meeting_display_source_android_title">Android</string>
+    <string name="meeting_display_source_hdmi_title">HDMI</string>
+
+    <!-- Meeting Eye UI titles -->
+    <string name="meeting_eye_power_on_title">Bekapcsolás</string>
+    <string name="meeting_eye_power_off_title">Kikapcsolás</string>
+    <string name="meeting_eye_tilt_group_title">Mozgatás</string>
+    <string name="meeting_eye_tilt_left_title">Balra</string>
+    <string name="meeting_eye_tilt_up_title">Fel</string>
+    <string name="meeting_eye_tilt_right_title">Jobbra</string>
+    <string name="meeting_eye_tilt_down_title">Le</string>
+    <string name="meeting_eye_zoom_title">Közelség</string>
+    <string name="meeting_eye_preset_group_title">Mentett állások</string>
 
     <!-- MQTT -->
     <string name="broker_uri">tcp://%s:1883</string>
     <string name="client_id">KuraClient</string>
     <string name="topic_prefix">iotgateway/devices/%s</string>
-    <string name="control_topic">topic_prefix%s/control</string>
+    <string name="control_topic">iotgateway/devices/%s/control</string>
     <string name="status_topic">iotgateway/devices/+/status/#</string>
 
     <!-- Strings related to Settings -->

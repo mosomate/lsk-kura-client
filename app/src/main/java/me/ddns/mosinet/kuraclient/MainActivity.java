@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Enable control
                 meetingDisplayFragment.setUiEnabled(true);
+                meetingEyeFragment.setUiEnabled(true);
 
                 // Subscribe to device status topics
                 try {
@@ -144,12 +145,17 @@ public class MainActivity extends AppCompatActivity {
 
                 // Disable control
                 meetingDisplayFragment.setUiEnabled(false);
+                meetingEyeFragment.setUiEnabled(false);
             }
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                meetingDisplayFragment.messageArrived(topic, mqttMessage);
-                meetingEyeFragment.messageArrived(topic, mqttMessage);
+                if (topic.startsWith(getString(R.string.topic_prefix, "meeting_display"))) {
+                    meetingDisplayFragment.messageArrived(topic, mqttMessage);
+                }
+                else if (topic.startsWith(getString(R.string.topic_prefix, "meeting_eye"))) {
+                    meetingEyeFragment.messageArrived(topic, mqttMessage);
+                }
             }
 
             @Override

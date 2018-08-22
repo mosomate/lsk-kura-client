@@ -11,6 +11,7 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,7 +76,7 @@ public class MQTTClient {
         mqttAndroidClient.setCallback(callback);
     }
 
-    public void sendMessageToDevice(String device, Map<String, Object> metrics) throws MqttException {
+    public void sendMessageToDevice(String device, Map<String, Object> metrics) {
         try {
             // Message
             JSONObject messageBody = new JSONObject();
@@ -84,15 +85,17 @@ public class MQTTClient {
             messageBody.put("sentOn", System.currentTimeMillis());
 
             // Init metrics
-            JSONObject messageMetrics = new JSONObject();
+            JSONArray messageMetrics = new JSONArray();
 
             // Add metrics
             for (Map.Entry<String, Object> metric : metrics.entrySet()) {
-                messageMetrics.put(metric.getKey(), metric.getValue());
+                JSONObject jsonMetric = new JSONObject();
+                jsonMetric.put(metric.getKey(), metric.getValue());
+                messageMetrics.put(jsonMetric);
             }
 
             // Add metrics to the message
-            messageBody.put("metrics", metrics);
+            messageBody.put("metrics", messageMetrics);
 
             //mqttHelper.sendMessage(message.toString());
             Log.i("json", messageBody.toString());
@@ -104,7 +107,12 @@ public class MQTTClient {
             message.setRetained(false);
 
             // Publish
-            mqttAndroidClient.publish(applicationContext.getString(R.string.control_topic, device), message);
+            try {
+                mqttAndroidClient.publish(applicationContext.getString(R.string.control_topic, device), message);
+            }
+            catch (MqttException e) {
+                Log.i("MqttException", "Exception during sending 'power off' command: " + e.getMessage());
+            }
         } catch (JSONException e) {
             Log.i(this.getClass().getName(), "Exception during json serialization: " + e.getMessage());
         }

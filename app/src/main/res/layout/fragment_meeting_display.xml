@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/power_button_background_color"
+        android:backgroundTint="@color/powerButtonBackgroundColor"
         android:textColor="@color/whiteTextColor"
         android:text="@string/meeting_display_power_on_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +20,10 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintTop_toBottomOf="@+id/powerButton">
 
         <TextView
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/meeting_display_volume_title"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <SeekBar
             android:id="@+id/volumeSeekBar"
@@ -46,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -55,49 +56,42 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/meeting_display_source_group_title"
-            android:textSize="18sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
+        <Button
             android:id="@+id/pcSourceButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:scaleType="fitXY"
-            android:padding="20dp"
+            android:text="PC"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:srcCompat="@drawable/windows_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <ImageButton
+        <Button
             android:id="@+id/androidSourceButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:padding="20dp"
-            android:scaleType="fitXY"
+            android:text="Android"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:srcCompat="@drawable/android_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <ImageButton
+        <Button
             android:id="@+id/hdmiSourceButton"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:padding="20dp"
-            android:scaleType="fitXY"
+            android:text="hdmi"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:srcCompat="@drawable/hdmi_connector" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
