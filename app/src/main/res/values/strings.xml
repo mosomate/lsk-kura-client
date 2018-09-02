@@ -14,7 +14,9 @@
     <!-- Meeting Display UI titles -->
     <string name="meeting_display_power_on_title">Bekapcsolás</string>
     <string name="meeting_display_power_off_title">Kikapcsolás</string>
+
     <string name="meeting_display_volume_title">Hangerő: [%03d]</string>
+
     <string name="meeting_display_source_group_title">Forrás</string>
     <string name="meeting_display_source_pc_title">PC</string>
     <string name="meeting_display_source_android_title">Android</string>
@@ -23,12 +25,17 @@
     <!-- Meeting Eye UI titles -->
     <string name="meeting_eye_power_on_title">Bekapcsolás</string>
     <string name="meeting_eye_power_off_title">Kikapcsolás</string>
+
     <string name="meeting_eye_tilt_group_title">Mozgatás</string>
-    <string name="meeting_eye_tilt_left_title">Balra</string>
-    <string name="meeting_eye_tilt_up_title">Fel</string>
-    <string name="meeting_eye_tilt_right_title">Jobbra</string>
-    <string name="meeting_eye_tilt_down_title">Le</string>
-    <string name="meeting_eye_zoom_title">Közelség</string>
+    <string name="meeting_eye_tilt_left_title">⬅️</string>
+    <string name="meeting_eye_tilt_up_title">⬆️</string>
+    <string name="meeting_eye_tilt_right_title">➡️</string>
+    <string name="meeting_eye_tilt_down_title">⬇️</string>
+
+    <string name="meeting_eye_zoom_group_title">Közelség</string>
+    <string name="meeting_eye_zoom_in_title">➕</string>
+    <string name="meeting_eye_zoom_out_title">➖</string>
+
     <string name="meeting_eye_preset_group_title">Mentett állások</string>
 
     <!-- MQTT -->

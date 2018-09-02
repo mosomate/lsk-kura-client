@@ -11,28 +11,35 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
 
 public class MQTTClient {
+
+    /*----- Fields -----*/
+
+
     // Context
     private Context applicationContext;
 
-    // MQTT Client
+    // Paho MQTT Client
     private MqttAndroidClient mqttAndroidClient;
 
-    // Broker
+    // Broker credentials
     private String brokerUsername;
     private String brokerPassword;
 
-    public MQTTClient(Context context, String address, String username, String password){
+
+    /*----- Constructors -----*/
+
+
+    MQTTClient(Context context, String address, String username, String password){
         // Set context
         applicationContext = context;
 
-        // Set connection settings
+        // Set connection credentials
         brokerUsername = username;
         brokerPassword = password;
 
@@ -63,7 +70,7 @@ public class MQTTClient {
 
             @Override
             public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                Log.w("Mqtt", "Failed to connect to: " + mqttAndroidClient.getServerURI() + exception.toString());
+                Log.w("mqtt", "Failed to connect to: " + mqttAndroidClient.getServerURI() + exception.toString());
             }
         });
     }
@@ -85,20 +92,15 @@ public class MQTTClient {
             messageBody.put("sentOn", System.currentTimeMillis());
 
             // Init metrics
-            JSONArray messageMetrics = new JSONArray();
+            JSONObject messageMetrics = new JSONObject();
 
             // Add metrics
             for (Map.Entry<String, Object> metric : metrics.entrySet()) {
-                JSONObject jsonMetric = new JSONObject();
-                jsonMetric.put(metric.getKey(), metric.getValue());
-                messageMetrics.put(jsonMetric);
+                messageMetrics.put(metric.getKey(), metric.getValue());
             }
 
             // Add metrics to the message
             messageBody.put("metrics", messageMetrics);
-
-            //mqttHelper.sendMessage(message.toString());
-            Log.i("json", messageBody.toString());
 
             // Create new MQTT message
             MqttMessage message = new MqttMessage();
@@ -119,6 +121,6 @@ public class MQTTClient {
     }
 
     public void subscribeToDeviceStatuses(IMqttActionListener listener) throws MqttException {
-        mqttAndroidClient.subscribe(applicationContext.getString(R.string.status_topic), 0, null, listener);
+        mqttAndroidClient.subscribe(applicationContext.getString(R.string.status_topic), 1, null, listener);
     }
 }

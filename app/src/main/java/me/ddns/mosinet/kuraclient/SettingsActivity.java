@@ -7,6 +7,9 @@ import me.ddns.mosinet.kuraclient.fragment.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    /*----- Activity lifecycle callbacks -----*/
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -12,7 +12,8 @@
         </EditTextPreference>
         <EditTextPreference
             android:title="@string/preferences_broker_password_title"
-            android:key="@string/preferences_broker_password_key">
+            android:key="@string/preferences_broker_password_key"
+            android:inputType="textPassword">
         </EditTextPreference>
     </PreferenceCategory>
 </PreferenceScreen>

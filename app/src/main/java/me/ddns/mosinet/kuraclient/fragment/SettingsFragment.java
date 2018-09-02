@@ -11,11 +11,16 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     /* Preferences */
 
+
     private SharedPreferences sharedPrefs;
 
     private EditTextPreference brokerAddress;
     private EditTextPreference brokerUsername;
     private EditTextPreference brokerPassword;
+
+
+    /*----- Fragment lifecycle callbacks -----*/
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         brokerUsername.setSummary(sharedPrefs.getString(getString(R.string.preferences_broker_username_key), ""));
 
         // MQTT broker username
-        brokerPassword.setSummary(sharedPrefs.getString(getString(R.string.preferences_broker_password_key), ""));
+        brokerPassword.setSummary(hideText(sharedPrefs.getString(getString(R.string.preferences_broker_password_key), "")));
     }
 
     @Override
@@ -80,7 +85,19 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         }
         // If the custom displayname changes
         else if (s.equals(getString(R.string.preferences_broker_password_key))) {
-            brokerPassword.setSummary(sharedPrefs.getString(getString(R.string.preferences_broker_password_key), ""));
+            brokerPassword.setSummary(hideText(sharedPrefs.getString(getString(R.string.preferences_broker_password_key), "")));
         }
+    }
+
+
+    /*----- Functions -----*/
+
+
+    private String hideText(String text) {
+        StringBuilder hiddenText = new StringBuilder();
+        for (int i=0; i<text.length(); ++i) {
+            hiddenText.append("\u2022");
+        }
+        return hiddenText.toString();
     }
 }

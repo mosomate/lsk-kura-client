@@ -24,12 +24,15 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import me.ddns.mosinet.kuraclient.fragment.DeviceFragment;
 import me.ddns.mosinet.kuraclient.fragment.MeetingDisplayFragment;
 import me.ddns.mosinet.kuraclient.fragment.MeetingEyeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     /*----- Fields -----*/
+    
+    
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -54,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView mqttStateTextView;
 
     // Fragments for devices
-    private MeetingDisplayFragment meetingDisplayFragment = new MeetingDisplayFragment();
-    private MeetingEyeFragment meetingEyeFragment = new MeetingEyeFragment();
+    private DeviceFragment meetingDisplayFragment = new MeetingDisplayFragment();
+    private DeviceFragment meetingEyeFragment = new MeetingEyeFragment();
 
 
     /*----- Activity lifecycle callbacks -----*/
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Init client
         mqttClient = new MQTTClient(getApplicationContext(), brokerAddress, brokerUsername, brokerPassword);
-
         mqttClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
+                // Set broker state label
                 mqttStateTextView.setText(R.string.mqtt_state_connected);
 
                 // Enable control
@@ -125,22 +130,23 @@ public class MainActivity extends AppCompatActivity {
                     mqttClient.subscribeToDeviceStatuses(new IMqttActionListener() {
                         @Override
                         public void onSuccess(IMqttToken asyncActionToken) {
-                            Log.w("mqtt","Subscribed!");
+                            Log.i("mqtt","Subscribed to device status changes!");
                         }
 
                         @Override
                         public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                            Log.w("mqtt", "Subscribed fail!");
+                            Log.i("mqtt", "Failed to subscribe to device status changes!");
                         }
                     });
                 }
                 catch (MqttException e) {
-
+                    Log.i("mqtt", "Failed to subscribe to device status changes!");
                 }
             }
 
             @Override
             public void connectionLost(Throwable throwable) {
+                // Set broker state label
                 mqttStateTextView.setText(R.string.mqtt_state_not_connected);
 
                 // Disable control
@@ -150,9 +156,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                // If the message is related to the Meeting Display
                 if (topic.startsWith(getString(R.string.topic_prefix, "meeting_display"))) {
                     meetingDisplayFragment.messageArrived(topic, mqttMessage);
                 }
+                // If the message is related to the Meeting Eye
                 else if (topic.startsWith(getString(R.string.topic_prefix, "meeting_eye"))) {
                     meetingEyeFragment.messageArrived(topic, mqttMessage);
                 }
@@ -164,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Connect to MQTT broker
         try {
             mqttClient.connect();
         }
@@ -176,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
+        // Disconnect from MQTT broker
         if (mqttClient != null) {
             try {
                 mqttClient.disconnect();
@@ -241,6 +251,10 @@ public class MainActivity extends AppCompatActivity {
             return 2;
         }
     }
+
+
+    /* ----- Functions ----- */
+
 
     public MQTTClient getMqttClient() {
         return mqttClient;
